@@ -1,4 +1,4 @@
-{% set name = "hipstr2" %}
+{% set name = "HipSTR2" %}
 {% set version = "VERSION" %}
 {% set vcommit = "VCOMMIT" %}
 {% set sha = "SHA256" %}
@@ -9,7 +9,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/{{ username }}/gymrek-lab/archive/{{ vcommit }}.tar.gz
+  url: https://github.com/{{ username }}/{{ name }}/archive/{{ vcommit }}.tar.gz
   sha256: {{ sha }}
 
 build:
@@ -30,7 +30,7 @@ test:
     - HipSTR --help
 
 about:
-  home: https://github.com/gymrek-lab/HipSTR2
+  home: https://github.com/{{ username }}/{{ name }}
   license: GPL-2
   license_file: LICENSE
   summary: Haplotype inference and phasing for Short Tandem Repeats
