@@ -16,6 +16,11 @@ build:
   number: 0
   run_exports:
       - {{ pin_subpackage('hipstr2', max_pin=None) }}
+  script:
+    - mkdir -p "${PREFIX}/bin"
+    - make version
+    - make
+    - cp HipSTR "${PREFIX}/bin/"
 
 requirements:
   build:
