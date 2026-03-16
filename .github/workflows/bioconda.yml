@@ -64,7 +64,7 @@ jobs:
       - name: Set package metadata
         run: |
           # TODO: set this to capture the version number dynamically
-          VERSION="$(awk -F': *' '$1 == "Version" {print $2}' DESCRIPTION)"
+          VERSION="$(grep 'version:' _config.yml | awk -F': *' '{print $2}')"
           VCOMMIT="${{ github.sha }}"
           SHA256="$(curl -sL "${{ github.server_url }}/${{ github.repository }}/archive/${{ github.sha }}.tar.gz" | shasum -a 256 | cut -d " " -f 1)"
           USERNAME=$(cut -d/ -f1 <<< "${{ github.repository }}")
