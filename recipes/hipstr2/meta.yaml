@@ -18,12 +18,10 @@ build:
   run_exports:
       - {{ pin_subpackage('hipstr2', max_pin="x.x") }}
   skip: true  # [win]
-  script_env:
-    - HIPSTR2_STATIC # default is to build dynamic, overridden in .github/workflows/bioconda.yml
   script:
     - mkdir -p "${PREFIX}/bin"
     - make version
-    - STATIC="${HIPSTR2_STATIC:-0}" make HipSTR DenovoFinder
+    - make HipSTR DenovoFinder
     - cp HipSTR DenovoFinder "${PREFIX}/bin/"
 
 requirements:
