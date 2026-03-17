@@ -83,10 +83,12 @@ jobs:
         shell: bash -el {0}
         run: |
           bioconda-utils build ${{ (startsWith(matrix.os, 'ubuntu') && format('--docker --mulled-test{0}', (endsWith(matrix.os, '-arm') && ' --docker-base-image quay.io/bioconda/bioconda-utils-build-env-cos7-aarch64') || '')) || ''  }} --packages ${{ matrix.packagename }}
+          mkdir -p ext
+          cph x ${{ env.CONDA }}/envs/biobuild/conda-bld/*/*.conda --dest ext
       - name: Upload built package as GitHub artifact
         id: artifact-upload
         uses: "actions/upload-artifact@v7"
         with:
           name: ${{ matrix.packagename }}-${{ matrix.os }}
-          path: ${{ env.CONDA }}/envs/biobuild/conda-bld/
+          path: ext/bin/HipSTR
           if-no-files-found: 'ignore'
