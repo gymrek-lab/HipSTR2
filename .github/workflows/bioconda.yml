@@ -85,11 +85,12 @@ jobs:
           bioconda-utils build ${{ (startsWith(matrix.os, 'ubuntu') && format('--docker --mulled-test{0}', (endsWith(matrix.os, '-arm') && ' --docker-base-image quay.io/bioconda/bioconda-utils-build-env-cos7-aarch64') || '')) || ''  }} --packages ${{ matrix.packagename }}
           mkdir -p ext
           cph x ${{ env.CONDA }}/envs/biobuild/conda-bld/*/*.conda --dest ext
+          mv ext/bin/HipSTR HipSTR-${{ matrix.os }}
       - name: Upload built package as GitHub artifact
         id: artifact-upload
         uses: "actions/upload-artifact@v7"
         with:
-          name: ${{ matrix.packagename }}-${{ matrix.os }}
+          name: HipSTR-${{ matrix.os }}
           archive: false
-          path: ext/bin/HipSTR
+          path: HipSTR-${{ matrix.os }}
           if-no-files-found: 'ignore'
