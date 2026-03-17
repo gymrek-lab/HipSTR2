@@ -1,4 +1,4 @@
-{% set name = "hipstr2" %}
+{% set name = "HipSTR2" %}
 {% set version = "VERSION" %}
 {% set vcommit = "VCOMMIT" %}
 {% set sha = "SHA256" %}
@@ -9,28 +9,38 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/{{ username }}/gymrek-lab/archive/{{ vcommit }}.tar.gz
+  url: https://github.com/{{ username }}/{{ name }}/archive/{{ vcommit }}.tar.gz
   sha256: {{ sha }}
-
+  patches:
+    - patches/0001-use-version-from-config.patch
+    - patches/0002-include-cstdint-in-region.patch
 build:
   number: 0
   run_exports:
-      - {{ pin_subpackage('hipstr2', max_pin=None) }}
+      - {{ pin_subpackage('hipstr2', max_pin="x.x") }}
+  script:
+    - mkdir -p "${PREFIX}/bin"
+    - make version
+    - make HipSTR DenovoFinder
+    - cp HipSTR DenovoFinder "${PREFIX}/bin/"
 
 requirements:
   build:
     - make
+    - {{ compiler('c') }} # for bundled cephes and htslib
     - {{ compiler('cxx') }}
   host:
-    - htslib
-
+    - xz
+    - zlib
+    - bzip2
 
 test:
   commands:
     - HipSTR --help
+    - DenovoFinder --help
 
 about:
-  home: https://github.com/gymrek-lab/HipSTR2
+  home: https://github.com/{{ username }}/{{ name }}
   license: GPL-2
   license_file: LICENSE
   summary: Haplotype inference and phasing for Short Tandem Repeats
