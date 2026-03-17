@@ -17,6 +17,7 @@ build:
   number: 0
   run_exports:
       - {{ pin_subpackage('hipstr2', max_pin="x.x") }}
+  skip: true  # [win]
   script_env:
     - HIPSTR2_STATIC
   script:
