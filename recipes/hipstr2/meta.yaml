@@ -13,6 +13,7 @@ source:
   sha256: {{ sha }}
   patches:
     - patches/0001-use-version-from-config.patch
+    - patches/0002-adapt-src-for-newest-htslib.patch
 build:
   number: 0
   run_exports:
@@ -33,6 +34,7 @@ requirements:
     - xz
     - zlib
     - bzip2
+    - htslib
 
 test:
   commands:
