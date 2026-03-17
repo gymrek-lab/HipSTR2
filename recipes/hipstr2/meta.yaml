@@ -17,10 +17,12 @@ build:
   number: 0
   run_exports:
       - {{ pin_subpackage('hipstr2', max_pin="x.x") }}
+  script_env:
+    - HIPSTR2_STATIC
   script:
     - mkdir -p "${PREFIX}/bin"
     - make version
-    - make HipSTR DenovoFinder
+    - STATIC="${HIPSTR2_STATIC:-0}" make HipSTR DenovoFinder
     - cp HipSTR DenovoFinder "${PREFIX}/bin/"
 
 requirements:
