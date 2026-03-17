@@ -11,7 +11,9 @@ package:
 source:
   url: https://github.com/{{ username }}/{{ name }}/archive/{{ vcommit }}.tar.gz
   sha256: {{ sha }}
-
+  patches:
+    - patches/0001-use-version-from-config.patch
+    - patches/0002-include-cstdint-in-region.patch
 build:
   number: 0
   run_exports:
@@ -19,20 +21,23 @@ build:
   script:
     - mkdir -p "${PREFIX}/bin"
     - make version
-    - make
+    - make HipSTR DenovoFinder
     - cp HipSTR DenovoFinder "${PREFIX}/bin/"
 
 requirements:
   build:
     - make
+    - {{ compiler('c') }} # for bundled cephes and htslib
     - {{ compiler('cxx') }}
   host:
-    - htslib
-
+    - xz
+    - zlib
+    - bzip2
 
 test:
   commands:
     - HipSTR --help
+    - DenovoFinder --help
 
 about:
   home: https://github.com/{{ username }}/{{ name }}
