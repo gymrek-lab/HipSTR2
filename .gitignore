@@ -1,0 +1,3 @@
+*.o
+lib/cephes/libprob.a
+src/version.cpp

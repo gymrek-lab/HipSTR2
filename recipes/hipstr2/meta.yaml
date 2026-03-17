@@ -13,11 +13,11 @@ source:
   sha256: {{ sha }}
   patches:
     - patches/0001-use-version-from-config.patch
-    - patches/0002-include-cstdint-in-region.patch
 build:
   number: 0
   run_exports:
       - {{ pin_subpackage('hipstr2', max_pin="x.x") }}
+  skip: true  # [win]
   script:
     - mkdir -p "${PREFIX}/bin"
     - make version

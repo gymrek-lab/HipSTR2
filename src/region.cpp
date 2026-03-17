@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 #include <stdlib.h>
+#include <cstdint>
 
 #include "error.h"
 #include "region.h"

@@ -1,0 +1,12 @@
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults
+dependencies:
+  - conda-forge::xz
+  - bioconda::htslib
+  - conda-forge::zlib
+  - conda-forge::bzip2
+  - conda-forge::hcephes
+  - conda-forge::gxx_linux-64
+  - conda-forge::gcc_linux-64
