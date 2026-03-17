@@ -4,7 +4,7 @@ channels:
   - nodefaults
 dependencies:
   - conda-forge::xz
-  - bioconda::hstlib
+  - bioconda::htslib
   - conda-forge::zlib
   - conda-forge::bzip2
   - conda-forge::hcephes
