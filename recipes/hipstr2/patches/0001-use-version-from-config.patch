@@ -15,7 +15,7 @@ index 0f7ea29..34037e4 100644
 -LDFLAGS=-static
 -else
 -LDFLAGS=
-+LDFLAGS += "-static -ldl -ldeflate -lpthread -lm"
++LDFLAGS += -static -ldl -ldeflate -lpthread -lm
  endif
  
  ## Source code files, add new files to this list
