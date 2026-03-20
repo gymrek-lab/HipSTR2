@@ -86,6 +86,8 @@ jobs:
           mkdir -p ext
           cph x ${{ env.CONDA }}/envs/biobuild/conda-bld/*/*.conda --dest ext
           mv ext/bin/HipSTR HipSTR-${{ matrix.os }}
+      - name: Test outside of conda
+        run: ./HipSTR-${{ matrix.os }} --help
       - name: Upload built package as GitHub artifact
         id: artifact-upload
         uses: "actions/upload-artifact@v7"
