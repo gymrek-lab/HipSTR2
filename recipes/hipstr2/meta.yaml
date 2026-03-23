@@ -3,6 +3,7 @@
 {% set vcommit = "VCOMMIT" %}
 {% set sha = "SHA256" %}
 {% set username = "USERNAME" %}
+{% set static = 0 %}
 
 package:
   name: {{ name|lower }}
@@ -13,6 +14,7 @@ source:
   sha256: {{ sha }}
   patches:
     - patches/0001-use-version-from-config.patch
+    - patches/0002-adapt-src-for-newest-htslib.patch
 build:
   number: 0
   run_exports:
@@ -21,7 +23,7 @@ build:
   script:
     - mkdir -p "${PREFIX}/bin"
     - make version
-    - make HipSTR DenovoFinder
+    - STATIC={{ static }} make HipSTR DenovoFinder
     - cp HipSTR DenovoFinder "${PREFIX}/bin/"
 
 requirements:
@@ -33,6 +35,11 @@ requirements:
     - xz
     - zlib
     - bzip2
+    - htslib
+    {% if static == 1 %}
+    - xz-static
+    - libdeflate
+    {% endif %}
 
 test:
   commands:
