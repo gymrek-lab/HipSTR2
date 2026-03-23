@@ -71,6 +71,7 @@ jobs:
           echo $VERSION $VCOMMIT $SHA256 $USERNAME
           sed -i.bak 's/"VERSION"/"'"$VERSION"'"/;s/"VCOMMIT"/"'"$VCOMMIT"'"/;s/"SHA256"/"'"$SHA256"'"/;s/"USERNAME"/"'"$USERNAME"'"/;s/static = "false"/static = "true"/' recipes/${{ matrix.packagename }}/meta.yaml
           rm recipes/${{ matrix.packagename }}/meta.yaml.bak
+          cat recipes/${{ matrix.packagename }}/meta.yaml
       - name: Create config.yml file
         run: |
           echo -e "channels:\n  - conda-forge\n  - bioconda\n  - defaults" > config.yml
