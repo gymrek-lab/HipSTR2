@@ -3,7 +3,7 @@
 {% set vcommit = "VCOMMIT" %}
 {% set sha = "SHA256" %}
 {% set username = "USERNAME" %}
-{% set static = "false" %}
+{% set static = 0 %}
 
 package:
   name: {{ name|lower }}
@@ -23,7 +23,7 @@ build:
   script:
     - mkdir -p "${PREFIX}/bin"
     - make version
-    - STATIC={{ static|int }} make HipSTR DenovoFinder
+    - STATIC={{ static }} make HipSTR DenovoFinder
     - cp HipSTR DenovoFinder "${PREFIX}/bin/"
 
 requirements:
@@ -36,7 +36,7 @@ requirements:
     - zlib
     - bzip2
     - htslib
-    {% if static %}
+    {% if static == 1 %}
     - xz-static
     - libdeflate
     {% endif %}

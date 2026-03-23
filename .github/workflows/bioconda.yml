@@ -69,7 +69,7 @@ jobs:
           SHA256="$(curl -sL "${{ github.server_url }}/${{ github.repository }}/archive/${{ github.sha }}.tar.gz" | shasum -a 256 | cut -d " " -f 1)"
           USERNAME=$(cut -d/ -f1 <<< "${{ github.repository }}")
           echo $VERSION $VCOMMIT $SHA256 $USERNAME
-          sed -i.bak 's/"VERSION"/"'"$VERSION"'"/;s/"VCOMMIT"/"'"$VCOMMIT"'"/;s/"SHA256"/"'"$SHA256"'"/;s/"USERNAME"/"'"$USERNAME"'"/;s/static = "false"/static = "true"/' recipes/${{ matrix.packagename }}/meta.yaml
+          sed -i.bak 's/"VERSION"/"'"$VERSION"'"/;s/"VCOMMIT"/"'"$VCOMMIT"'"/;s/"SHA256"/"'"$SHA256"'"/;s/"USERNAME"/"'"$USERNAME"'"/;s/static = 0/static = 1/' recipes/${{ matrix.packagename }}/meta.yaml
           rm recipes/${{ matrix.packagename }}/meta.yaml.bak
           cat recipes/${{ matrix.packagename }}/meta.yaml
       - name: Create config.yml file
